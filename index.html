@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Queen's Beauty Studio · Hermosillo</title>
+<meta name="description" content="Estudio de belleza en Hermosillo. Uñas, cabello, pestañas y cejas con más de 30 años de experiencia. Agenda tu cita.">
+<meta name="theme-color" content="#92505E">
+<link rel="icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Great+Vibes&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Queen's Beauty Studio — landing
+   Colores medidos del logo y del material de Reina (MAPA_DE_RUTA.md).
+   Las fotos de Reina y del estudio van en "huecos": si el archivo
+   todavía no existe, se ve un recuadro con la etiqueta de qué foto va.
+   ============================================================ */
+:root{
+  --fondo:#FFF7F8; --rosa:#FFE1EA; --rosa-2:#F6D4DD; --malva:#92505E; --malva-2:#BA8694;
+  --tinta:#2F2624; --tinta-2:#6B5A5E;
+  --oro-1:#FAD8AA; --oro-2:#CCA556; --oro-3:#9F7715;
+  --oro: linear-gradient(135deg,var(--oro-1) 0%,var(--oro-2) 45%,var(--oro-3) 100%);
+  --radio:18px; --ancho:1120px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fondo);color:var(--tinta);font-family:"Jost",system-ui,sans-serif;font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.envoltura{max-width:var(--ancho);margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+.firma{font-family:"Great Vibes",cursive;font-weight:400;color:var(--oro-3);font-size:1.6em;line-height:1}
+.dorado{background:var(--oro);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--malva);font-weight:500}
+
+/* ---------- Botones ---------- */
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 28px;border-radius:999px;
+  font:600 17px "Jost",sans-serif;letter-spacing:.02em;text-decoration:none;cursor:pointer;border:0;transition:transform .2s,box-shadow .2s}
+.boton:hover{transform:translateY(-2px)}
+.boton-principal{background:var(--malva);color:#fff;box-shadow:0 10px 26px -10px rgba(146,80,94,.7)}
+.boton-oro{background:var(--oro);color:#3B2A06;box-shadow:0 10px 26px -12px rgba(159,119,21,.8)}
+.boton-borde{background:transparent;color:var(--malva);border:1.5px solid var(--malva)}
+.boton svg{width:22px;height:22px;flex:none}
+
+/* ---------- Encabezado ---------- */
+.barra{position:sticky;top:0;z-index:20;background:rgba(255,247,248,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(146,80,94,.12)}
+.barra .envoltura{display:flex;align-items:center;justify-content:space-between;height:68px}
+.barra img{height:50px;width:auto}
+.barra nav{display:flex;gap:26px;align-items:center}
+.barra nav a{text-decoration:none;font-size:15px;color:var(--tinta-2)}
+.barra nav a:hover{color:var(--malva)}
+.barra nav a.boton{color:#fff}
+.barra .boton{min-height:44px;padding:0 20px;font-size:15px}
+@media (max-width:820px){.barra nav a:not(.boton){display:none}}
+
+/* ---------- Huecos para fotos pendientes ---------- */
+.hueco{position:relative;overflow:hidden;border-radius:var(--radio);background:
+  repeating-linear-gradient(45deg,rgba(204,165,86,.08) 0 12px,transparent 12px 24px),var(--rosa)}
+.hueco::after{content:attr(data-etiqueta);position:absolute;inset:14px;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:2px dashed var(--oro-2);border-radius:calc(var(--radio) - 6px);color:var(--malva);font-size:15px;font-weight:500;padding:18px;line-height:1.4}
+.hueco img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+/* Un hueco que ya tiene su foto se puede ampliar */
+.hueco[data-visor]{cursor:zoom-in}
+.hueco[data-visor] img{transition:transform .5s ease}
+.hueco[data-visor]:hover img{transform:scale(1.05)}
+
+/* ---------- Portada ---------- */
+.portada{position:relative;overflow:hidden;padding:56px 0 72px;background:
+  radial-gradient(1200px 600px at 85% 10%,var(--rosa) 0,transparent 60%),
+  radial-gradient(800px 500px at 0% 100%,#FDE9E4 0,transparent 60%)}
+.portada .envoltura{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.portada h1{font-size:clamp(44px,6.4vw,82px);letter-spacing:-.01em}
+.portada h1 em{font-style:italic;font-weight:500}
+.portada p.lead{font-size:20px;color:var(--tinta-2);max-width:32ch;margin:22px 0 32px}
+.portada .acciones{display:flex;flex-wrap:wrap;gap:14px}
+.sello{display:inline-flex;align-items:center;gap:14px;margin-top:34px;padding:12px 20px 12px 12px;background:#fff;border-radius:999px;box-shadow:0 12px 30px -18px rgba(47,38,36,.35)}
+.sello b{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--oro);color:#3B2A06;font:600 20px "Jost"}
+.sello span{font-size:15px;line-height:1.3;color:var(--tinta-2)}
+.portada .foto{aspect-ratio:4/5;box-shadow:0 30px 60px -30px rgba(146,80,94,.55)}
+.portada .firma-foto{position:absolute;right:-8px;bottom:26px;z-index:2;background:#fff;padding:10px 20px;border-radius:14px;box-shadow:0 10px 24px -14px rgba(0,0,0,.35)}
+.portada .marco{position:relative}
+@media (max-width:820px){
+  .portada{padding:28px 0 56px}
+  .portada .envoltura{grid-template-columns:1fr;gap:30px}
+  .portada .marco{order:-1}
+  .portada .foto{aspect-ratio:4/4.4}
+  .portada p.lead{font-size:18px}
+  .portada .acciones .boton{flex:1 1 100%}
+}
+
+/* ---------- Secciones ---------- */
+section{padding:88px 0}
+.titulo{text-align:center;max-width:720px;margin:0 auto 48px}
+.titulo h2{font-size:clamp(36px,4.6vw,56px);margin-top:10px}
+.titulo p{color:var(--tinta-2);margin:16px 0 0}
+@media (max-width:820px){section{padding:64px 0}}
+
+/* ---------- Reina ---------- */
+.reina{background:#fff}
+.reina .envoltura{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.reina .fotos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.reina .envoltura > *,.reina .fotos > *,.estudio .fotos > *{min-width:0;min-height:0}
+.reina .fotos .hueco:first-child{grid-row:span 2;aspect-ratio:3/4.6}
+.reina .fotos .hueco{aspect-ratio:1/1}
+.reina h2{font-size:clamp(34px,4.2vw,52px);margin:10px 0 22px}
+.reina p{color:var(--tinta-2);margin:0 0 16px}
+.datos{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 32px}
+.dato{background:var(--fondo);border-radius:14px;padding:18px 14px;text-align:center}
+.dato b{display:block;font:600 34px "Cormorant Garamond",serif;color:var(--malva);line-height:1}
+.dato span{font-size:14px;color:var(--tinta-2)}
+@media (max-width:400px){.datos{grid-template-columns:1fr 1fr}.datos .dato:last-child{grid-column:span 2}.dato{padding:14px 10px}.dato span{font-size:13px}}
+@media (max-width:820px){.reina .envoltura{grid-template-columns:1fr;gap:34px}}
+
+/* ---------- Para quién ---------- */
+.dos{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.tarjeta{background:#fff;border-radius:22px;padding:36px 32px;box-shadow:0 20px 40px -32px rgba(146,80,94,.5);position:relative;overflow:hidden}
+.tarjeta::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--oro)}
+.tarjeta h3{font-size:32px;margin:12px 0 14px}
+.tarjeta ul{list-style:none;margin:20px 0 0;padding:0}
+.tarjeta li{padding:10px 0 10px 34px;position:relative;border-top:1px solid var(--rosa-2)}
+.tarjeta li::before{content:"♛";position:absolute;left:0;top:9px;color:var(--oro-2);font-size:18px}
+@media (max-width:820px){.dos{grid-template-columns:1fr}}
+
+/* ---------- Galería ---------- */
+.galeria{background:linear-gradient(180deg,var(--fondo),var(--rosa) 140%)}
+.pestanas{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+.pestanas button{min-height:46px;padding:0 22px;border-radius:999px;border:1.5px solid var(--malva-2);background:#fff;color:var(--malva);font:500 16px "Jost";cursor:pointer}
+.pestanas button[aria-pressed="true"]{background:var(--malva);border-color:var(--malva);color:#fff}
+.carrusel{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*16px)/4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;margin:0 -20px;scrollbar-width:thin}
+.carrusel button{all:unset;cursor:zoom-in;scroll-snap-align:start;border-radius:16px;overflow:hidden;aspect-ratio:3/4;background:var(--rosa-2)}
+.carrusel img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.carrusel button:hover img{transform:scale(1.05)}
+@media (max-width:820px){.carrusel{grid-auto-columns:72%}}
+.pista{text-align:center;font-size:14px;color:var(--tinta-2);margin-top:6px}
+dialog{border:0;padding:0;background:transparent;max-width:min(92vw,720px)}
+dialog::backdrop{background:rgba(47,38,36,.82)}
+dialog img{max-height:86vh;width:auto;border-radius:16px}
+dialog button{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#fff;font-size:22px;cursor:pointer}
+
+/* ---------- Menú desplegable ----------
+   Cada categoría es un <details>: se abre una a la vez (name="menu").
+   Adentro va la lista y, abajo, fotos de ejemplo de ese servicio. */
+.menu .lista{max-width:820px;margin:0 auto;display:grid;gap:14px}
+details.grupo{background:#fff;border-radius:22px;box-shadow:0 14px 34px -28px rgba(146,80,94,.6);transition:box-shadow .35s,transform .35s;scroll-margin-top:84px}
+details.grupo[open]{box-shadow:0 26px 50px -30px rgba(146,80,94,.75)}
+.grupo summary{list-style:none;display:flex;align-items:center;gap:16px;padding:16px 18px;cursor:pointer;min-height:88px;-webkit-tap-highlight-color:transparent}
+.grupo summary::-webkit-details-marker{display:none}
+.grupo summary:hover .icono{transform:rotate(-6deg) scale(1.06)}
+.icono{position:relative;width:60px;height:60px;border-radius:50%;overflow:hidden;flex:none;background:var(--oro);display:grid;place-items:center;
+  box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--oro-2);transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.icono img{width:100%;height:100%;object-fit:cover}
+.icono span{font-size:26px;color:#fff}
+.resumen{flex:1;min-width:0}
+.resumen h3{font-size:27px;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.resumen h3 .firma{font-size:24px}
+.resumen small{display:block;font-size:14px;color:var(--tinta-2);margin-top:2px}
+.flecha{width:38px;height:38px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--fondo);color:var(--malva);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s}
+.flecha svg{width:18px;height:18px}
+details[open] .flecha{transform:rotate(180deg);background:var(--malva);color:#fff}
+.cuerpo{padding:0 20px 22px}
+details[open] .cuerpo > *{animation:entra .55s cubic-bezier(.2,.8,.2,1) both}
+details[open] .cuerpo > *:nth-child(2){animation-delay:.04s} details[open] .cuerpo > *:nth-child(3){animation-delay:.08s}
+details[open] .cuerpo > *:nth-child(4){animation-delay:.12s} details[open] .cuerpo > *:nth-child(5){animation-delay:.16s}
+details[open] .cuerpo > *:nth-child(6){animation-delay:.2s} details[open] .cuerpo > *:nth-child(n+7){animation-delay:.24s}
+@keyframes entra{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.linea{display:flex;justify-content:space-between;gap:14px;padding:12px 0;border-top:1px dashed var(--rosa-2)}
+.linea div{font-size:17px}
+.linea small{display:block;font-size:13px;color:var(--tinta-2)}
+.linea b{white-space:nowrap;font-weight:600;color:var(--malva)}
+.muestras{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.muestras button,.muestras .hueco{all:unset;box-sizing:border-box;position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;cursor:zoom-in;background:var(--rosa-2)}
+.muestras .hueco{cursor:default;background:repeating-linear-gradient(45deg,rgba(204,165,86,.1) 0 8px,transparent 8px 16px),var(--rosa)}
+.muestras .hueco::after{content:attr(data-etiqueta);position:absolute;inset:5px;display:flex;align-items:center;justify-content:center;text-align:center;
+  border:1.5px dashed var(--oro-2);border-radius:10px;color:var(--malva);font-size:10.5px;line-height:1.25;padding:4px}
+.muestras img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;transition:transform .6s}
+.muestras button:hover img{transform:scale(1.08)}
+.muestras-titulo{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--malva);margin-top:18px}
+.cuerpo .agendar{margin-top:18px;width:100%}
+.nota{margin-top:26px;text-align:center;color:var(--tinta-2);font-size:15px}
+@media (max-width:420px){.grupo summary{gap:12px;padding:14px}.icono{width:52px;height:52px}.resumen h3{font-size:24px}.cuerpo{padding:0 14px 18px}.muestras{gap:6px}}
+
+/* ---------- Videos ---------- */
+.videos{background:#fff}
+.reels{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 3*16px)/4);gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 20px 18px;margin:0 -20px;scrollbar-width:thin}
+@media (max-width:820px){.reels{grid-auto-columns:40%}}
+@media (max-width:560px){.reels{grid-auto-columns:62%}}
+.reel{position:relative;margin:0;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:var(--tinta);scroll-snap-align:start;cursor:pointer;box-shadow:0 10px 30px -14px rgba(47,38,36,.45)}
+.reel video{width:100%;height:100%;object-fit:cover;display:block}
+.reel figcaption{position:absolute;left:0;right:0;bottom:0;padding:34px 14px 14px;color:#fff;font-size:14px;font-weight:500;background:linear-gradient(transparent,rgba(47,38,36,.8))}
+.reel .sonido{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;background:rgba(47,38,36,.55) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5 6 9H2v6h4l5 4z'/%3E%3Cpath d='m23 9-6 6M17 9l6 6'/%3E%3C/svg%3E") no-repeat center/18px}
+.reel.oye .sonido{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 5 6 9H2v6h4l5 4z'/%3E%3Cpath d='M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14'/%3E%3C/svg%3E")}
+
+/* ---------- Estudio ---------- */
+.estudio .fotos{display:grid;grid-template-columns:2fr 1fr 1fr;gap:14px}
+.estudio .hueco{aspect-ratio:4/5}
+.estudio .hueco:first-child{grid-row:span 2;aspect-ratio:auto;min-height:100%}
+@media (max-width:820px){.estudio .fotos{grid-template-columns:1fr 1fr}.estudio .hueco:first-child{grid-column:span 2;grid-row:auto;aspect-ratio:4/3}}
+
+/* ---------- Tu cita ---------- */
+.cita{background:var(--malva);color:#fff}
+.cita .titulo p,.cita .eyebrow{color:#F6D4DD}
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;counter-reset:paso}
+.paso{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:26px 24px}
+.paso::before{counter-increment:paso;content:counter(paso);display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--oro);color:#3B2A06;font-weight:600;margin-bottom:14px}
+.paso h3{font-family:"Jost";font-size:19px;font-weight:600;margin-bottom:6px}
+.paso p{margin:0;color:#F6D4DD;font-size:16px}
+.cita .centro{text-align:center;margin-top:40px}
+
+/* ---------- Visítanos ---------- */
+.visita .envoltura{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.visita .caja{background:#fff;border-radius:22px;padding:34px 30px}
+.visita h3{font-size:30px;margin-bottom:16px}
+.horario div{display:flex;justify-content:space-between;padding:10px 0;border-top:1px solid var(--rosa-2)}
+.horario div span:last-child{font-weight:500}
+.redes{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+.redes a{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--fondo);color:var(--malva)}
+.redes svg{width:24px;height:24px}
+@media (max-width:820px){.visita .envoltura{grid-template-columns:1fr}}
+
+footer{padding:40px 0 110px;text-align:center;color:var(--tinta-2);font-size:14px}
+footer img{height:80px;width:auto;margin:0 auto 10px}
+
+/* ---------- Botón flotante de WhatsApp ---------- */
+.flotante{position:fixed;right:18px;bottom:18px;z-index:30;width:64px;height:64px;border-radius:50%;background:#25D366;color:#fff;display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(0,0,0,.45)}
+.flotante svg{width:34px;height:34px}
+
+/* ---------- Brillos, destellos y movimiento ----------
+   Todo es decorativo: si el celular pide "reducir movimiento", se apaga. */
+.portada > .envoltura,.cita > .envoltura{position:relative;z-index:1}
+.cita{position:relative;overflow:hidden}
+.brillos{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.brillos i{position:absolute;left:var(--x);top:var(--y);width:var(--s);height:var(--s);opacity:0;
+  background:radial-gradient(circle,#fff 0,var(--oro-1) 35%,var(--oro-2) 60%,transparent 72%);
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  animation:titila var(--d) ease-in-out var(--r) infinite}
+@keyframes titila{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:.95;transform:scale(1) rotate(45deg)}60%{opacity:.7}}
+
+/* Destello que recorre lo dorado */
+.dorado{background:linear-gradient(110deg,var(--oro-3) 0%,var(--oro-2) 30%,var(--oro-1) 45%,#FFF4DC 50%,var(--oro-1) 55%,var(--oro-2) 70%,var(--oro-3) 100%);
+  background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:recorre 6s linear infinite}
+@keyframes recorre{from{background-position:120% 0}to{background-position:-120% 0}}
+.boton-oro,.boton-principal{position:relative;overflow:hidden;isolation:isolate}
+.boton-oro::after,.boton-principal::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-120%);animation:barrido 4.5s ease-in-out infinite}
+.boton-principal::after{background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.28) 50%,transparent 65%)}
+.boton-oro{z-index:0}
+@keyframes barrido{0%,60%{transform:translateX(-120%)}85%,100%{transform:translateX(120%)}}
+
+/* La foto principal flota apenas y su marco brilla */
+.portada .foto{animation:flota 7s ease-in-out infinite}
+.portada .foto::before{content:"";position:absolute;inset:-2px;border-radius:inherit;z-index:2;pointer-events:none;padding:2px;
+  background:conic-gradient(from var(--giro,0deg),transparent 0 70%,var(--oro-1) 80%,#fff 85%,var(--oro-2) 90%,transparent 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:gira 6s linear infinite}
+@property --giro{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes gira{to{--giro:360deg}}
+@keyframes flota{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.portada .firma-foto{animation:flota 7s ease-in-out .6s infinite}
+
+/* El sello de 30+ late suave */
+.sello b{position:relative}
+.sello b::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--oro-2);animation:late 2.8s ease-out infinite}
+@keyframes late{from{opacity:.8;transform:scale(.9)}to{opacity:0;transform:scale(1.35)}}
+
+/* Coronitas que titilan en las listas */
+.tarjeta li::before{animation:titila-suave 3.2s ease-in-out infinite}
+.tarjeta li:nth-child(2)::before{animation-delay:.6s}.tarjeta li:nth-child(3)::before{animation-delay:1.2s}.tarjeta li:nth-child(4)::before{animation-delay:1.8s}
+@keyframes titila-suave{0%,100%{opacity:.55;transform:scale(.92)}50%{opacity:1;transform:scale(1.12);text-shadow:0 0 10px rgba(250,216,170,.9)}}
+
+/* Tarjetas que se levantan al pasar el dedo o el mouse */
+.tarjeta,.paso,.dato,.visita .caja{transition:transform .45s cubic-bezier(.2,.8,.2,1),box-shadow .45s}
+@media (hover:hover){.tarjeta:hover,.visita .caja:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(146,80,94,.6)}.paso:hover{transform:translateY(-6px)}}
+
+/* Botón flotante de WhatsApp con onda */
+.flotante::before{content:"";position:absolute;inset:0;border-radius:50%;background:#25D366;z-index:-1;animation:onda 2.4s ease-out infinite}
+@keyframes onda{from{opacity:.55;transform:scale(1)}to{opacity:0;transform:scale(1.6)}}
+
+/* Botones de acción centrados y a todo lo ancho en celular */
+@media (max-width:820px){
+  .reina .boton,.cita .centro .boton{display:flex;width:100%}
+  .reina .envoltura > div:last-child{text-align:left}
+}
+
+/* Escalonado: los hijos aparecen uno tras otro */
+.js .escalon > *{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i,0) * 110ms)}
+.js .escalon.visto > *{opacity:1;transform:none}
+.js .aparece.desde-izq{transform:translateX(-34px)} .js .aparece.desde-der{transform:translateX(34px)}
+.js .aparece.desde-izq.visto,.js .aparece.desde-der.visto{transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  .brillos,.boton-oro::after,.boton-principal::after,.sello b::after,.flotante::before,.portada .foto::before{display:none}
+  .dorado,.portada .foto,.portada .firma-foto,.tarjeta li::before{animation:none}
+  .js .escalon > *{opacity:1;transform:none;transition:none}
+    details[open] .cuerpo > *{animation:none}
+}
+
+/* ---------- Aparición suave al bajar (visible por defecto) ---------- */
+.js .aparece{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.js .aparece.visto{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .aparece{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+
+<header class="barra">
+  <div class="envoltura">
+    <a href="#inicio" aria-label="Queen's Beauty Studio, inicio"><img src="img/logo.png" alt="Queen's Beauty Studio"></a>
+    <nav>
+      <a href="#reina">Reina</a>
+      <a href="#trabajo">Trabajo</a>
+      <a href="#menu">Servicios</a>
+      <a href="#visitanos">Visítanos</a>
+      <a class="boton boton-principal" href="#" data-whatsapp="Hola Reina, quiero agendar una cita">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+<!-- ================= PORTADA ================= -->
+<section class="portada">
+  <div class="brillos" data-brillos="16" aria-hidden="true"></div>
+  <div class="envoltura">
+    <div class="aparece">
+      <span class="eyebrow">Estudio de belleza · Hermosillo</span>
+      <h1 style="margin-top:14px">Luce como la <em class="dorado">reina</em> que ya eres.</h1>
+      <p class="lead">Más de 30 años haciendo que las mujeres se vean y se sientan en su mejor versión. Uñas, cabello, pestañas y cejas en manos de una experta.</p>
+      <div class="acciones">
+        <a class="boton boton-principal" href="#" data-whatsapp="Hola Reina, quiero agendar una cita">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+          Agenda tu cita
+        </a>
+        <a class="boton boton-borde" href="#menu">Ver servicios y precios</a>
+      </div>
+      <div class="sello">
+        <b>30+</b>
+        <span>años de experiencia<br>en todas las áreas de la belleza</span>
+      </div>
+    </div>
+    <div class="marco aparece desde-der">
+      <!-- HUECO: foto principal de Reina. Guardar como web/img/reina-portada.jpg -->
+      <figure class="hueco foto" data-visor data-etiqueta="Reina · portada · reina-portada.jpg" style="margin:0">
+        <img src="img/reina-portada.jpg" alt="Reina, dueña de Queen's Beauty Studio" onerror="this.remove()">
+      </figure>
+      <div class="firma-foto"><span class="firma">Reina</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REINA ================= -->
+<section class="reina" id="reina">
+  <div class="envoltura">
+    <div class="fotos aparece desde-izq">
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Reina · retrato · reina-retrato.jpg"><img src="img/reina-retrato.jpg" alt="Reina frente a su pared de esmaltes" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Reina trabajando · reina-trabajando.jpg"><img src="img/reina-trabajando.jpg" alt="Reina trabajando en su estudio" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Reina · detalle · reina-detalle.jpg"><img src="img/reina-detalle.jpg" alt="Reina en su estudio" onerror="this.remove()"></figure>
+    </div>
+    <div class="aparece">
+      <span class="eyebrow">Quién te atiende</span>
+      <h2>La <span class="dorado">Reina de los detalles</span>.</h2>
+      <p><b>Mírala a ella: ese es el nivel.</b> Reina lleva más de tres décadas en la belleza, y basta verla para entender por qué sus clientas regresan año tras año. Sabe cuidar la piel, el cabello y las manos como nadie, porque lleva toda una vida haciéndolo en sí misma y en miles de mujeres.</p>
+      <p>Aquí no hay prisa ni trabajo al montón. Te atiende ella, en persona, con el detalle de quien conoce su oficio de memoria y el gusto de quien sigue enamorada de lo que hace.</p>
+      <div class="datos escalon">
+        <div class="dato"><b>30+</b><span>años de oficio</span></div>
+        <div class="dato"><b>Ella</b><span>te atiende en persona</span></div>
+        <div class="dato"><b>4</b><span>especialidades</span></div>
+      </div>
+      <a class="boton boton-oro" href="#" data-whatsapp="Hola Reina, quiero agendar una cita contigo">Quiero que me atienda Reina</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PARA QUIÉN ================= -->
+<section>
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">Hecho para ti</span>
+      <h2>Tu mejor versión no es un secreto.<br><span class="dorado">Es un buen trabajo.</span></h2>
+    </div>
+    <div class="dos escalon">
+      <article class="tarjeta">
+        <span class="firma">Glow up</span>
+        <h3>Para ti, que vas por todo</h3>
+        <p>Sacarle todo el provecho a lo que ya tienes. Los detalles que suben tu nivel y se notan en cada foto.</p>
+        <ul>
+          <li>Uñas impecables que hablan de ti antes que tú</li>
+          <li>Mirada con pestañas y cejas que enmarcan tu cara</li>
+          <li>Cabello con brillo, color y movimiento</li>
+          <li>Ese look pulido que no se improvisa</li>
+        </ul>
+      </article>
+      <article class="tarjeta">
+        <span class="firma">Siempre radiante</span>
+        <h3>Para ti, que no piensas soltar tu brillo</h3>
+        <p>Fresca, luminosa y jovial. La edad es un número; cómo te ves, lo decides tú.</p>
+        <ul>
+          <li>Color que cubre y rejuvenece tu cabello</li>
+          <li>Manos y pies cuidados como te mereces</li>
+          <li>Cejas y pestañas que abren y levantan la mirada</li>
+          <li>La experiencia de alguien que sabe lo que te favorece</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALERÍA ================= -->
+<section class="galeria" id="trabajo">
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">Su trabajo</span>
+      <h2>Aquí se nota la diferencia</h2>
+      <p>Trabajos reales hechos por Reina en el estudio.</p>
+    </div>
+    <div class="pestanas" role="group" aria-label="Filtrar trabajos">
+      <button type="button" data-filtro="unas" aria-pressed="true">Uñas</button>
+      <button type="button" data-filtro="cabello" aria-pressed="false">Cabello</button>
+    </div>
+    <div class="carrusel" id="carrusel" aria-live="polite"></div>
+    <p class="pista">Desliza para ver más · toca una foto para verla grande</p>
+  </div>
+</section>
+<!-- ================= VIDEOS (del Instagram de Reina) ================= -->
+<section class="videos" id="videos">
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">En movimiento</span>
+      <h2>Así se ve <span class="dorado">en vivo</span></h2>
+      <p>Videos reales del estudio, tal como los publica Reina.</p>
+    </div>
+    <div class="reels" id="reels">
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-mechas.jpg" src="video/reel-mechas.mp4"></video><figcaption>Antes y después: mechas</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-unas.jpg" src="video/reel-unas.mp4"></video><figcaption>Uñas con flor</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-ondas.jpg" src="video/reel-ondas.mp4"></video><figcaption>Color y ondas</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-reina.jpg" src="video/reel-reina.mp4"></video><figcaption>Reina con su clienta</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-peinado.jpg" src="video/reel-peinado.mp4"></video><figcaption>Peinado y maquillaje</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-corte.jpg" src="video/reel-corte.mp4"></video><figcaption>Corte bob</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-color.jpg" src="video/reel-color.mp4"></video><figcaption>Cambio de color</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+      <figure class="reel"><video muted loop playsinline preload="none" poster="video/reel-estrellas.jpg" src="video/reel-estrellas.mp4"></video><figcaption>Uñas con estrellas</figcaption><span class="sonido" aria-hidden="true"></span></figure>
+    </div>
+    <p class="pista">Desliza para ver más · toca un video para oírlo</p>
+  </div>
+</section>
+<dialog id="visor"><button type="button" aria-label="Cerrar">×</button><img alt=""></dialog>
+
+<!-- ================= MENÚ ================= -->
+<section class="menu" id="menu">
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">Servicios</span>
+      <h2>Menú de servicios</h2>
+      <p>Toca una categoría para ver precios, tiempos y ejemplos. Precios y tiempos de referencia: Reina te confirma el tuyo al agendar.</p>
+    </div>
+    <div class="lista escalon">
+    <details class="grupo" name="menu">
+      <summary>
+        <span class="icono"><img src="img/unas-02.webp" alt=""></span>
+        <span class="resumen"><h3>Uñas <span class="firma">manos</span></h3><small>7 servicios · desde $80</small></span>
+        <span class="flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="cuerpo">
+        <div class="linea"><div>Uñas nuevas acrílico<small>Con terminado en gel color · aprox. 2 h</small></div><b>desde $400</b></div>
+        <div class="linea"><div>Relleno de acrílico<small>Mismo color, forma y largo · aprox. 1 h 30</small></div><b>desde $350</b></div>
+        <div class="linea"><div>Gelish<small>aprox. 45 min</small></div><b>$200</b></div>
+        <div class="linea"><div>Rubber o gel calcio<small>Con o sin gel color · aprox. 1 h</small></div><b>desde $280</b></div>
+        <div class="linea"><div>Baño de acrílico<small>Uña natural corta · aprox. 1 h 30</small></div><b>$350</b></div>
+        <div class="linea"><div>Extras<small>French, efectos, cristales, dijes, relieve</small></div><b>desde $60</b></div>
+        <div class="linea"><div>Retiro de gel · de acrílico</div><b>$80 · $150</b></div>
+        <p class="nota" style="text-align:left;margin:12px 0 0">Todos los servicios de manos incluyen manicura rusa y diseño sencillo.</p>
+        <p class="muestras-titulo">Así queda</p>
+        <div class="muestras"><button type="button" data-visor><img loading="lazy" src="img/unas-01.webp" alt="Uñas perla con piedras"></button><button type="button" data-visor><img loading="lazy" src="img/unas-02.webp" alt="Uñas rojas cromadas"></button><button type="button" data-visor><img loading="lazy" src="img/unas-03.webp" alt="Uñas blancas con moñitos"></button><button type="button" data-visor><img loading="lazy" src="img/unas-05.webp" alt="French amarillo con flor"></button></div>
+        <a class="boton boton-principal agendar" href="#" data-whatsapp="Hola Reina, quiero agendar uñas">Agendar este servicio</a>
+      </div>
+    </details>
+    <details class="grupo" name="menu">
+      <summary>
+        <span class="icono"><span aria-hidden="true">♛</span></span>
+        <span class="resumen"><h3>Uñas <span class="firma">pies</span></h3><small>5 servicios · desde $280</small></span>
+        <span class="flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="cuerpo">
+        <div class="linea"><div>Pedicura express<small>aprox. 45 min</small></div><b>$350</b></div>
+        <div class="linea"><div>Spa tradicional<small>aprox. 1 h</small></div><b>$450</b></div>
+        <div class="linea"><div>Pedi ruso con acripié<small>Sin gel · con gel · aprox. 2 h</small></div><b>$450 · $550</b></div>
+        <div class="linea"><div>Pedi delux<small>Exfoliación, mascarilla y masaje</small></div><b>$650</b></div>
+        <div class="linea"><div>Acripié<small>Dedo gordo · aprox. 1 h</small></div><b>$280</b></div>
+        
+        <a class="boton boton-principal agendar" href="#" data-whatsapp="Hola Reina, quiero agendar pedicura">Agendar este servicio</a>
+      </div>
+    </details>
+    <details class="grupo" name="menu">
+      <summary>
+        <span class="icono"><img src="img/cabello-01.webp" alt=""></span>
+        <span class="resumen"><h3>Cabello</h3><small>8 servicios · desde $200</small></span>
+        <span class="flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="cuerpo">
+        <div class="linea"><div>Tinte<small>Retoque $800 · aprox. 2 h</small></div><b>desde $1,200</b></div>
+        <div class="linea"><div>Mechas<small>aprox. 3 a 5 h</small></div><b>desde $1,200</b></div>
+        <div class="linea"><div>Keratina Brasil Cacau<small>aprox. 3 h</small></div><b>desde $1,200</b></div>
+        <div class="linea"><div>Corte<small>aprox. 1 h</small></div><b>desde $300</b></div>
+        <div class="linea"><div>Spa de cabello Joico<small>Con secado · aprox. 1 h</small></div><b>$450</b></div>
+        <div class="linea"><div>Ondas</div><b>desde $200</b></div>
+        <div class="linea"><div>Peinado y ondas</div><b>$900</b></div>
+        <div class="linea"><div>Peinado y maquillaje<small>aprox. 1 h 30 a 2 h</small></div><b>$1,300</b></div>
+        
+        <p class="muestras-titulo">Así queda</p>
+        <div class="muestras"><button type="button" data-visor><img loading="lazy" src="img/cabello-01.webp" alt="Ondas en cabello rubio"></button><button type="button" data-visor><img loading="lazy" src="img/cabello-04.webp" alt="Ondas en cabello castaño"></button><button type="button" data-visor><img loading="lazy" src="img/cabello-06.webp" alt="Peinado recogido"></button><button type="button" data-visor><img loading="lazy" src="img/cabello-07.webp" alt="Peinado semirecogido"></button></div>
+        <a class="boton boton-principal agendar" href="#" data-whatsapp="Hola Reina, quiero agendar cabello">Agendar este servicio</a>
+      </div>
+    </details>
+    <details class="grupo" name="menu">
+      <summary>
+        <span class="icono"><span aria-hidden="true">♛</span></span>
+        <span class="resumen"><h3>Pestañas <span class="firma">y cejas</span></h3><small>5 servicios · desde $250</small></span>
+        <span class="flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="cuerpo">
+        <div class="linea"><div>Pestañas 1 x 1<small>aprox. 2 h</small></div><b>desde $600</b></div>
+        <div class="linea"><div>Rizado de pestaña con color<small>aprox. 45 min</small></div><b>$350</b></div>
+        <div class="linea"><div>Laminado y perfilado de ceja</div><b>$350</b></div>
+        <div class="linea"><div>Laminado, perfilado y henna<small>aprox. 1 h</small></div><b>$500</b></div>
+        <div class="linea"><div>Diseño de depilación con henna</div><b>$250</b></div>
+        
+        <a class="boton boton-principal agendar" href="#" data-whatsapp="Hola Reina, quiero agendar pestañas o cejas">Agendar este servicio</a>
+      </div>
+    </details>
+    <details class="grupo" name="menu">
+      <summary>
+        <span class="icono"><span aria-hidden="true">♛</span></span>
+        <span class="resumen"><h3>Depilado</h3><small>4 servicios · desde $80</small></span>
+        <span class="flecha" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+      </summary>
+      <div class="cuerpo">
+        <div class="linea"><div>Bigote</div><b>$80</b></div>
+        <div class="linea"><div>Cejas</div><b>$150</b></div>
+        <div class="linea"><div>Axilas</div><b>$150</b></div>
+        <div class="linea"><div>Cara completa</div><b>$400</b></div>
+        
+        
+        <a class="boton boton-principal agendar" href="#" data-whatsapp="Hola Reina, quiero agendar depilado">Agendar este servicio</a>
+      </div>
+    </details>
+    </div>
+    <p class="nota">Garantía de 3 días por levantamiento de color o desprendimiento natural.</p>
+  </div>
+</section>
+
+<!-- ================= ESTUDIO ================= -->
+<section class="estudio" style="background:#fff">
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">El estudio</span>
+      <h2>Un espacio solo para ti</h2>
+      <p>Privado, tranquilo y exclusivo para damas. Aquí vienes a consentirte sin prisas.</p>
+    </div>
+    <div class="fotos aparece">
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Estudio · estudio-1.jpg"><img src="img/estudio-1.jpg" alt="Interior de Queen's Beauty Studio" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Estudio · estudio-2.jpg"><img loading="lazy" src="img/estudio-2.jpg" alt="Pared de esmaltes del estudio" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Estudio · estudio-3.jpg"><img loading="lazy" src="img/estudio-3.jpg" alt="Mesa de uñas con productos" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Estudio · estudio-4.jpg"><img loading="lazy" src="img/estudio-4.jpg" alt="Productos profesionales de cabello" onerror="this.remove()"></figure>
+      <figure class="hueco" style="margin:0" data-visor data-etiqueta="Estudio · estudio-5.jpg"><img loading="lazy" src="img/estudio-5.jpg" alt="Letrero de neón Queen's" onerror="this.remove()"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TU CITA ================= -->
+<section class="cita" id="cita">
+  <div class="brillos" data-brillos="12" aria-hidden="true"></div>
+  <div class="envoltura">
+    <div class="titulo aparece">
+      <span class="eyebrow">Tu cita</span>
+      <h2>Así apartas tu lugar</h2>
+      <p>Atención con cita previa, para dedicarte el tiempo que mereces.</p>
+    </div>
+    <div class="pasos escalon">
+      <div class="paso"><h3>Escríbenos por WhatsApp</h3><p>Dinos qué servicio quieres y qué día te acomoda.</p></div>
+      <div class="paso"><h3>Aparta con $200</h3><p>Tu anticipo asegura tu lugar y se descuenta del total al terminar. Por transferencia, efectivo o tarjeta.</p></div>
+      <div class="paso"><h3>Llega puntual</h3><p>Tienes 10 minutos de tolerancia. Si pierdes tu cita, el anticipo no se reembolsa y la nueva cita lleva otro anticipo.</p></div>
+      <div class="paso"><h3>Ven solo tú</h3><p>Espacio solo para damas y sin acompañantes. Para pestañas y cejas, llega sin maquillaje ni rímel.</p></div>
+    </div>
+    <div class="centro"><a class="boton boton-oro" href="#" data-whatsapp="Hola Reina, quiero apartar una cita">Apartar mi cita</a></div>
+  </div>
+</section>
+
+<!-- ================= VISÍTANOS ================= -->
+<section class="visita" id="visitanos">
+  <div class="envoltura">
+    <div class="caja aparece">
+      <h3>Horario</h3>
+      <div class="horario">
+        <div><span>Lunes a viernes</span><span style="text-align:right">9:00 a 1:00<br>3:00 a 7:00</span></div>
+        <div><span>Sábado</span><span>9:00 a 5:00</span></div>
+        <div><span>Domingo</span><span>Cerrado</span></div>
+      </div>
+      <p class="nota" style="text-align:left">Previa cita de preferencia.</p>
+    </div>
+    <div class="caja aparece">
+      <h3>Dónde estamos</h3>
+      <p style="margin:0 0 18px">Retorno Buccino #3A, colonia Villa Bonita<br>Hermosillo, Sonora</p>
+      <a class="boton boton-borde" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Retorno+Buccino+3A+Villa+Bonita+Hermosillo+Sonora">Cómo llegar</a>
+      <div class="redes">
+        <a href="https://www.instagram.com/quee.nsbeautystudio/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="https://www.facebook.com/profile.php?id=100063622297958" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.4V11H7v4h3v7h4v-7h3l1-4h-4V8.6c0-.4.3-.6.6-.6z"/></svg></a>
+        <a href="https://www.tiktok.com/@queens.beauty.stu0" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.2 1.7 3.8 4 4v3.2c-1.5 0-2.9-.4-4-1.1v6.1a6 6 0 1 1-6-6h.5v3.3h-.5a2.7 2.7 0 1 0 2.7 2.7V3h3.3z"/></svg></a>
+        <a href="#" data-whatsapp="Hola Reina" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <img src="img/logo.png" alt="Queen's Beauty Studio">
+  <div>Queen's Beauty Studio · Hermosillo, Sonora</div>
+</footer>
+
+<a class="flotante" href="#" data-whatsapp="Hola Reina, quiero agendar una cita" aria-label="Agendar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.1-.2.3-.8.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.4-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+<script>
+/* ---------- WhatsApp: un solo número para toda la página ----------
+   Cuando exista la agenda en línea, basta con cambiar este bloque para
+   que los botones la abran en vez de WhatsApp. */
+const WHATSAPP = "526625098826";
+document.querySelectorAll("[data-whatsapp]").forEach(a => {
+  a.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(a.dataset.whatsapp);
+  a.target = "_blank"; a.rel = "noopener";
+});
+
+/* ---------- Galería con filtro ---------- */
+const FOTOS = {
+  unas: 18, cabello: 7
+};
+const carrusel = document.getElementById("carrusel");
+function pintar(tipo){
+  carrusel.innerHTML = "";
+  for (let i = 1; i <= FOTOS[tipo]; i++){
+    const n = String(i).padStart(2, "0");
+    const b = document.createElement("button");
+    b.type = "button";
+    b.setAttribute("aria-label", "Ver foto " + i);
+    b.innerHTML = '<img loading="lazy" src="img/' + tipo + '-' + n + '.webp" alt="Trabajo de ' + tipo + ' en Queen\'s Beauty Studio">';
+    carrusel.appendChild(b);
+  }
+  carrusel.scrollLeft = 0;
+}
+document.querySelectorAll("[data-filtro]").forEach(btn => btn.addEventListener("click", () => {
+  document.querySelectorAll("[data-filtro]").forEach(x => x.setAttribute("aria-pressed", x === btn));
+  pintar(btn.dataset.filtro);
+}));
+pintar("unas");
+
+/* ---------- Videos: corren solos (sin sonido) mientras se ven ----------
+   Se cargan hasta que aparecen en pantalla (preload="none"), asi la pagina
+   no gasta datos de la clienta en videos que no mira. */
+const reels = [...document.querySelectorAll(".reel video")];
+const sinMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
+if ("IntersectionObserver" in window && !sinMovimiento) {
+  const vigia = new IntersectionObserver(es => es.forEach(e => {
+    if (e.intersectionRatio >= .6) e.target.play().catch(() => {});
+    else e.target.pause();
+  }), { threshold: [0, .6] });
+  reels.forEach(v => vigia.observe(v));
+}
+document.querySelectorAll(".reel").forEach(r => r.addEventListener("click", () => {
+  const v = r.querySelector("video");
+  const oir = v.muted || v.paused;
+  // solo un video con sonido a la vez
+  document.querySelectorAll(".reel").forEach(x => { x.querySelector("video").muted = true; x.classList.remove("oye"); });
+  if (oir) { v.muted = false; r.classList.add("oye"); v.play().catch(() => {}); }
+}));
+
+/* ---------- Visor de foto grande (galería y fotos de ejemplo del menú) ---------- */
+const visor = document.getElementById("visor");
+document.addEventListener("click", e => {
+  const caja = e.target.closest("#carrusel button, [data-visor]");
+  const img = caja && caja.querySelector("img");
+  if (!img || typeof visor.showModal !== "function") return;
+  e.preventDefault();
+  visor.querySelector("img").src = img.src;
+  visor.showModal();
+});
+visor.addEventListener("click", () => visor.close());
+
+/* ---------- Brillitos dorados (decoración) ---------- */
+document.querySelectorAll("[data-brillos]").forEach(caja => {
+  const n = +caja.dataset.brillos;
+  for (let i = 0; i < n; i++){
+    const b = document.createElement("i");
+    const s = 8 + Math.random() * 16;
+    b.style.cssText = `--x:${Math.random()*96}%;--y:${Math.random()*92}%;--s:${s}px;--d:${2.6 + Math.random()*3}s;--r:${-Math.random()*5}s`;
+    caja.appendChild(b);
+  }
+});
+
+/* ---------- Menú: al abrir una categoría, se acomoda en pantalla ---------- */
+document.querySelectorAll("details.grupo").forEach(d => d.addEventListener("toggle", () => {
+  if (d.open) setTimeout(() => d.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+}));
+
+/* ---------- Aparición al bajar ----------
+   La página es visible por defecto: solo si el navegador soporta el
+   observador se esconden los bloques para que aparezcan suaves. */
+if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+  document.documentElement.classList.add("js");
+  const obs = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ e.target.classList.add("visto"); obs.unobserve(e.target); }
+  }), { threshold: .15, rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll(".escalon").forEach(el => [...el.children].forEach((h, i) => h.style.setProperty("--i", i)));
+  document.querySelectorAll(".aparece, .escalon").forEach(el => obs.observe(el));
+}
+</script>
+</body>
+</html>
